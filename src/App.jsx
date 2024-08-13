@@ -1,32 +1,47 @@
 import "./App.css";
-import ButtonComponent from "./components/ButtonComponent";
+import { myStyles } from "./styles/App.styles";
+import styles from "./Estilos.module.css";
 
-function App() {
-  return (
-    <div>
-      <h1>Formulario de inscripcion</h1>
-      <form action="">
-        <input type="text" />
-        <input type="text" />
-        <input type="text" />
-      </form>
-      <ButtonComponent label="Miboton" />
-      <ButtonComponent label="Miboton2" />
-      <ButtonComponent label="Miboton3" />
-      <ButtonComponent
-        label="Login"
-        myFunction={() => {
-          console.log("login");
-        }}
-      />
-      <ButtonComponent
-        label="Logout"
-        myFunction={() => {
-          console.log("logout");
-        }}
-      />
-    </div>
-  );
-}
+//tiene this
+// function App() {
+//   const isColorBlue = false;
+
+//   if (isColorBlue) {
+//     console.log("Es Color Azul");
+//   } else {
+//     console.log("No es Color Azul");
+//   }
+
+//   //Menos aceptable
+//   // if (isColorBlue) {
+//   //   return <div>Es Color Azul</div>;
+//   // } else {
+//   //   return <div>No es Color Azul</div>;
+//   // }
+
+//   //Mas Aceptable -- ECMAScript 6 (ES6)
+//   return isColorBlue ? <div>Es Color Azul</div> : <div>No es Color Azul</div>;
+// }
+
+// export default App;
+
+//no tiene this
+
+const App = () => {
+  // return <div className="my-class">Hola a todos!</div>;
+  const isBlue = true;
+
+  //CSS in JS ---> Estilos CSS en Javascript
+  // const myStyles = {
+  //   color: isBlue ? "blue" : "red",
+  //   fontSize: "2rem",
+  //   fontWeight: "bold",
+  // };
+
+  //CSS Module
+
+  // return <div style={myStyles}>Hola a todos</div>;
+  return <div className={isBlue ? styles.estilosTwo : styles.estilosOne}>Hola a todos</div>;
+};
 
 export default App;
