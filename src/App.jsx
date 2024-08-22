@@ -1,50 +1,60 @@
-import { useEffect, useState } from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import MainLayout from "./layout/MainLayout";
 import ItemListContainer from "./components/ItemListContainer/ItemListContainer";
+import { ProductsData } from "./data/productData";
+
+// Ejemplo de uso de una promesa
+function myPromise() {
+  return new Promise((resolve, reject) => {
+    const number = 5;
+    if (number === 5) {
+      resolve("El número es 5");
+    } else {
+      reject("El número no es 5");
+    }
+  });
+}
 
 function App() {
-  const [state, setState] = useState(0);
-  const [stateTwo, setStateTwo] = useState(0);
+  // *** Codigo bloqueante
+  // function ejecutarTareaBloqueante(){
+  //   const start = Date.now();
+  //   while(Date.now() - start < 3000){
+  //     // Esperar 3 segundos
+  //   }
+  //   console.log("Tarea bloqueante terminada");
+  // }
 
-  //useEffect = hook que se ejecuta despues de que el componente se renderiza, sirve para controlar efectos secundarios en el ciclo de vida del componente
-  //Se va a ejecutar SIEMPRE aunque sea una vez (la primera vez que se renderiza el componente)
+  // console.log("Inicio de tarea");
+  // ejecutarTareaBloqueante();
+  // console.log("Fin de tarea");
 
-  //1 - useEffect Feo - useEffect sin control
-  useEffect(() => {
-    console.log("Se renderizó el componente App - useEffect sin control");
-  });
+  // ****Codigo no bloqueante
+  // function ejecutarTareaNoBloqueante(){
+  //     setTimeout(() => {
+  //       console.log("Tarea no bloqueante terminada");
+  //     }, 3000);
+  // }
 
-  //2 - useEffect ideal - useEffect controlado -- useEffect con dependencias vacias (Es el mas comun)
-  useEffect(() => {
-    // llamada a la api para traer todos mis productos
-    console.log("Me rendericé por primera vez - useEffect dependencias vacias");
-  }, []);
-
-  //3 - useEffect con dependencias - useEffect controlado
-  useEffect(() => {
-    console.log("Me rendericé por primera vez - useEffect con dependencias");
-  }, [state]);
+  // console.log("Inicio de tarea");
+  // ejecutarTareaNoBloqueante();
+  // console.log(2 + 2);
+  // console.log("Fin de tarea");
+  // myPromise()
+  //   .then((res) => {
+  //     console.log(res);
+  //   })
+  //   .catch((err) => {
+  //     console.error(err);
+  //   })
+  //   .finally(() => {
+  //     console.log("Promesa finalizada");
+  //   });
 
   return (
     <ChakraProvider>
       <MainLayout>
-        <ItemListContainer greeting="Bienvenidos a mi tienda!" />
-        <button
-          onClick={() => {
-            setState(state + 1);
-          }}
-        >
-          Cambio de Estado 1
-        </button>
-
-        <button
-          onClick={() => {
-            setStateTwo(stateTwo + 1);
-          }}
-        >
-          Cambio de Estado 2
-        </button>
+        <ItemListContainer products={ProductsData}/>
       </MainLayout>
     </ChakraProvider>
   );
