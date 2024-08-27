@@ -1,60 +1,50 @@
-import { ChakraProvider } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+
+import { ChakraProvider, Flex, Spinner } from "@chakra-ui/react";
 import MainLayout from "./layout/MainLayout";
 import ItemListContainer from "./components/ItemListContainer/ItemListContainer";
-import { ProductsData } from "./data/productData";
 
-// Ejemplo de uso de una promesa
-function myPromise() {
-  return new Promise((resolve, reject) => {
-    const number = 5;
-    if (number === 5) {
-      resolve("El número es 5");
-    } else {
-      reject("El número no es 5");
-    }
-  });
-}
+import { getAllProducts } from "./services/products";
 
 function App() {
-  // *** Codigo bloqueante
-  // function ejecutarTareaBloqueante(){
-  //   const start = Date.now();
-  //   while(Date.now() - start < 3000){
-  //     // Esperar 3 segundos
-  //   }
-  //   console.log("Tarea bloqueante terminada");
-  // }
+  //Generamos el estado donde vamos a almacenar los productos
+  const [productsData, setProductsData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // console.log("Inicio de tarea");
-  // ejecutarTareaBloqueante();
-  // console.log("Fin de tarea");
-
-  // ****Codigo no bloqueante
-  // function ejecutarTareaNoBloqueante(){
-  //     setTimeout(() => {
-  //       console.log("Tarea no bloqueante terminada");
-  //     }, 3000);
-  // }
-
-  // console.log("Inicio de tarea");
-  // ejecutarTareaNoBloqueante();
-  // console.log(2 + 2);
-  // console.log("Fin de tarea");
-  // myPromise()
-  //   .then((res) => {
-  //     console.log(res);
-  //   })
-  //   .catch((err) => {
-  //     console.error(err);
-  //   })
-  //   .finally(() => {
-  //     console.log("Promesa finalizada");
-  //   });
+  useEffect(() => {
+    getAllProducts()
+      .then((res) => {
+        if (res.status === 200) {
+          //Actualizamos ese estado con la informacion de la API
+          setProductsData(res.data.products);
+        } else {
+          console.log("Error");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        // Quiero que cuando finalice mi promesa - la aplicación deje de mostrar el spinner
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <ChakraProvider>
       <MainLayout>
-        <ItemListContainer products={ProductsData}/>
+        {loading ? (
+          <Flex
+            width={"100%"}
+            height={"90vh"}
+            alignItems={"center"}
+            justifyContent={"center"}
+          >
+            <Spinner size="xl" />
+          </Flex>
+        ) : (
+          <ItemListContainer products={productsData} />
+        )}
       </MainLayout>
     </ChakraProvider>
   );

@@ -9,7 +9,7 @@ export const ProductsData = [
     {
         id: 2,
         name: "Product 2",
-        price: 200,
+        price: 300,
         description: "Product 2 description",
         image: "https://d22fxaf9t8d39k.cloudfront.net/2d26dc2abbee8550f054ace5fadb6777df95da22b3b552143848c13ec5b56cb710140.jpg",
     },
