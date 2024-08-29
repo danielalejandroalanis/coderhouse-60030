@@ -1,34 +1,12 @@
-import { useEffect, useState } from "react";
-
 import { ChakraProvider, Flex, Spinner } from "@chakra-ui/react";
+import { ItemListContainer } from "./components";
 import MainLayout from "./layout/MainLayout";
-import ItemListContainer from "./components/ItemListContainer/ItemListContainer";
-
-import { getAllProducts } from "./services/products";
+import { useProducts, useProductsById } from "./hooks";
 
 function App() {
-  //Generamos el estado donde vamos a almacenar los productos
-  const [productsData, setProductsData] = useState([]);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    getAllProducts()
-      .then((res) => {
-        if (res.status === 200) {
-          //Actualizamos ese estado con la informacion de la API
-          setProductsData(res.data.products);
-        } else {
-          console.log("Error");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        // Quiero que cuando finalice mi promesa - la aplicación deje de mostrar el spinner
-        setLoading(false);
-      });
-  }, []);
+  const { productsData, loading } = useProducts();
+  const {productData} = useProductsById(1);
 
   return (
     <ChakraProvider>
