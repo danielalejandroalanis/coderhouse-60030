@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getAllProducts } from "../services/products";
 
-export const useProducts = (filter) => {
+export const useProducts = () => {
   const [productsData, setProductsData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -9,9 +9,7 @@ export const useProducts = (filter) => {
     getAllProducts()
       .then((res) => {
         if (res.status === 200) {
-          if (filter) {
-            setProductsData(res.data.products);
-          }
+          setProductsData(res.data.products);
         } else {
           console.log("Error");
         }
@@ -24,5 +22,5 @@ export const useProducts = (filter) => {
       });
   }, []);
 
-  return { productsData: productsData, loading: loading };
+  return { productsData, loading };
 };

@@ -6,10 +6,17 @@ export const useProductsById = (id) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getProductById(id).then((res) => {
-      console.log(res);
-    });
+    getProductById(id)
+      .then((res) => {
+        setProductData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
-  return {productData}
+  return { productData, loading };
 };
