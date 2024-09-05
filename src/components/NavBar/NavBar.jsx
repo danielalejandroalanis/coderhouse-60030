@@ -35,7 +35,8 @@ export const NavBar = () => {
           <Box alignContent={"flex-start"} width={"100%"} marginLeft={30}>
             <Menu>
               <Link to="/">Home</Link>
-              <MenuButton as={Link} cursor="pointer">
+              <Link to="/events" style={{marginLeft: 30}}>Eventos</Link>
+              <MenuButton as={Link} cursor="pointer" style={{marginLeft: 30}}>
                 Dynamic Menu
               </MenuButton>
               <MenuList>
