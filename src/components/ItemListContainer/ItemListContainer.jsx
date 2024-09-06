@@ -1,22 +1,50 @@
-import { Box } from "@chakra-ui/react";
+import {
+  Box,
+  Card,
+  Stack,
+  Heading,
+  CardBody,
+  Divider,
+  CardFooter,
+  ButtonGroup,
+  Image,
+  Text,
+} from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
-// const ItemListContainer = (props) => { //Cualquiera de las dos formas es valida
-const ItemListContainer = ({greeting}) => {
-    // console.log(props)
+export const ItemListContainer = ({ products }) => {
   return (
-    <Box
-      width={"100vw"}
-      height={"90vh"}
-      display={"flex"}
-      alignItems={"center"}
-      justifyContent={"center"}
-    >
-      {/* {props.greeting} */}
-      {greeting}
+    <Box display={"flex"} flexWrap={"wrap"}>
+      {products.map((product) => (
+        <Card key={product.id} maxW="sm" margin={"1rem"}>
+          <CardBody>
+            <Image
+              src={product.thumbnail}
+              alt={product.name}
+              borderRadius="lg"
+            />
+            <Stack mt="6" spacing="3">
+              <Heading size="md">{product.title}</Heading>
+              <Text>{product.description}</Text>
+              <Text color="blue.600" fontSize="2xl">
+                {product.price}
+              </Text>
+            </Stack>
+          </CardBody>
+          <Divider />
+          <CardFooter>
+            <ButtonGroup spacing="2">
+              {/* <Button variant="ghost" colorScheme="blue">
+                Add to cart
+              </Button> */}
+              <Link to={`/item/${product.id}`}>
+                {" "}
+                Ir a detalle del producto{" "}
+              </Link>
+            </ButtonGroup>
+          </CardFooter>
+        </Card>
+      ))}
     </Box>
   );
 };
-
-export default ItemListContainer;
-
-rafce

@@ -1,0 +1,1 @@
+export * from './MainRouter'; // exporta todo lo que se exporta en MainRouter
