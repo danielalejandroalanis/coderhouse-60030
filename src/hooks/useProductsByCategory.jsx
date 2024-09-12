@@ -3,6 +3,7 @@ import { getProductsByCategory } from "../services/products.service";
 
 export const useProductsByCategory = (id) => {
   const [products, setProducts] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     getProductsByCategory(id)
@@ -12,8 +13,9 @@ export const useProductsByCategory = (id) => {
       })
       .catch((error) => {
         console.log(error);
-      });
+      })
+      .finally(() => setLoading(false));
   }, [id]);
 
-  return { products };
+  return { products, loading };
 };
