@@ -208,5 +208,5 @@ export const ItemDetailContainer = ({ product }) => {
         </Stack>
       </SimpleGrid>
     </Container>
-  )
+  );
 };
