@@ -2,22 +2,20 @@ import React from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 
-export const useProducts = () => {
-  const [products, setProducts] = React.useState([]);
+export const useItemsCollection = (categoryName) => {
+  const [items, setItems] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState(false);
 
   React.useEffect(() => {
-    const productsCollection = collection(db, "products");
-    getDocs(productsCollection)
+    const itemsCollection = collection(db, categoryName);
+    getDocs(itemsCollection)
       .then((snapshot) => {
-        setProducts(
-          snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
-        );
+        setItems(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
       })
       .catch(() => setError(true))
       .finally(() => setLoading(false));
   }, []);
 
-  return { products, loading, error };
+  return { items, loading, error };
 };

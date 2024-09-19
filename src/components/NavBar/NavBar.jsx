@@ -16,13 +16,13 @@ import {
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { CartWidget } from "../CartWidget";
 import { Link } from "react-router-dom";
-import { useCategory } from "../../hooks";
-import { createProductsFirestore } from "../../helpers";
+import { useItemsCollection } from "../../hooks";
+// import { createProductsFirestore } from "../../helpers";
 
 export const NavBar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
 
-  const { category } = useCategory();
+  const { items } = useItemsCollection("categories");
 
   return (
     <>
@@ -35,15 +35,17 @@ export const NavBar = () => {
             <MenuButton as={Link} cursor="pointer" style={{ marginLeft: 30 }}>
               Categorias
             </MenuButton>
-            <MenuList height={"300px"} overflowY={"scroll"}>
-              {category.map((category) => (
+            <MenuList height={"fit-content"} overflowY={"scroll"}>
+              {items.map((category) => (
                 <MenuItem key={category.slug}>
                   <Link to={`/category/${category.slug}`}>{category.name}</Link>
                 </MenuItem>
               ))}
             </MenuList>
           </Menu>
-          <Button onClick={() => createProductsFirestore('products')}>Crear productos</Button>
+          {/* <Button onClick={() => createProductsFirestore("products")}>
+            Crear productos
+          </Button> */}
           <Flex alignItems={"center"}>
             <Stack direction={"row"} spacing={7}>
               <CartWidget />

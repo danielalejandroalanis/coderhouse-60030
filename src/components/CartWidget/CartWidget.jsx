@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { Flex, Text } from "@chakra-ui/react";
 import { BsMinecart } from "react-icons/bs";
 import { CartContext } from "../../context";
-
+import { Link } from "react-router-dom";
 export const CartWidget = () => {
   const { cartState } = useContext(CartContext);
 
@@ -17,7 +17,9 @@ export const CartWidget = () => {
       width={"60px"}
     >
       <BsMinecart size={30} />
-      <Text fontSize={"1.5rem"}>{qtyTotalItems}</Text>
+      <Link to="/checkout">
+        <Text fontSize={"1.5rem"}>{qtyTotalItems}</Text>
+      </Link>
     </Flex>
   );
 };

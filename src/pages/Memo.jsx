@@ -1,5 +1,6 @@
 import { Button } from "@chakra-ui/react";
 import React from "react";
+import { useItemsCollection } from "../hooks";
 
 const ChildMemo = React.memo(({ count }) => {
   console.log("Se renderizó el componente hijo");
