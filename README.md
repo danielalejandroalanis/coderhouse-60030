@@ -1,8 +1,23 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Coderhouse 60030
 
-Currently, two official plugins are available:
+Este proyecto fué realizado para el curso de React de Coderhouse.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Demo
+
+Descargar el proyecto
+
+## Instalar dependencias
+> npm install
+
+## Ejecución local
+> npm run dev
+
+## Ingresar a 
+> http://localhost:5173
+
+##Autor
+
+- [Daniel Alanis](https://github.com/danielalejandroalanis)
+
+

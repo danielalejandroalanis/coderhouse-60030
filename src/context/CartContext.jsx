@@ -5,6 +5,11 @@ export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cartState, setCartState] = useState([]);
 
+  /**
+   * @description Esta funcion agrega un item al carrito
+   * @param {*} product El producto a agregar
+   * @param {*} qtyItem La cantidad de ese producte a agregar
+   */
   const addItem = (product, qtyItem) => {
     const existingProduct = cartState.find((item) => item.id === product.id);
 
@@ -25,7 +30,6 @@ export const CartProvider = ({ children }) => {
 
   const removeItem = (product) => {
     const existingProduct = cartState.find((item) => item.id === product.id);
-
     if (existingProduct) {
       // Si la cantidad es 1, eliminamos el producto del carrito
       if (existingProduct.qtyItem === 1) {
@@ -47,10 +51,10 @@ export const CartProvider = ({ children }) => {
     setCartState(cartState.filter((item) => item.id !== product.id));
   };
 
-  //Context Hell: es un término que se utiliza para describir la situación en la que un componente necesita acceder a muchos contextos diferentes.
-
   return (
-    <CartContext.Provider value={{ cartState, addItem, removeItem, deleteItem }}>
+    <CartContext.Provider
+      value={{ cartState, addItem, removeItem, deleteItem }}
+    >
       {children}
     </CartContext.Provider>
   );
