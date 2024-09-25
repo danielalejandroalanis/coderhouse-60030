@@ -116,4 +116,3 @@ export const ItemDetailContainer = ({ product }) => {
     </Container>
   );
 };
- 
