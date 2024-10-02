@@ -1,10 +1,13 @@
 import React from "react";
-import { ItemListContainer } from "../components";
+import { ItemListContainer, Loader } from "../components";
 import { useProducts } from "../hooks/useProducts";
 
 export const Home = () => {
-
   const { products, loading } = useProducts();
 
-  return <ItemListContainer products={products} />;
+  return loading ? (
+    <Loader />
+  ) : (
+    <ItemListContainer products={products} />
+  );
 };

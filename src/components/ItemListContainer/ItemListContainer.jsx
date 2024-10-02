@@ -13,7 +13,9 @@ import {
 import { Link } from "react-router-dom";
 
 export const ItemListContainer = ({ products }) => {
-  return (
+  return products.length === 0 ? (
+    <Box>No hay productos para mostrar</Box>
+  ) : (
     <Box display={"flex"} flexWrap={"wrap"}>
       {products.map((product) => (
         <Card key={product.id} maxW="sm" margin={"1rem"}>
@@ -34,9 +36,6 @@ export const ItemListContainer = ({ products }) => {
           <Divider />
           <CardFooter>
             <ButtonGroup spacing="2">
-              {/* <Button variant="ghost" colorScheme="blue">
-                Add to cart
-              </Button> */}
               <Link to={`/item/${product.id}`}>
                 {" "}
                 Ir a detalle del producto{" "}
